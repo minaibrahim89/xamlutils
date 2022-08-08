@@ -1,0 +1,14 @@
+﻿// See https://aka.ms/new-console-template for more information
+
+using System.CommandLine;
+using XamlUtils.Commands;
+
+namespace XamlUtils;
+
+public class Program
+{
+    public static async Task<int> Main(string[] args)
+    {
+        return await new AppCommand().InvokeAsync(args);
+    }
+}
