@@ -16,14 +16,22 @@ public class DuplicateKeysCommand : Command
 
     private static void FindDuplicateKeys(FileInfo? file)
     {
-        if (file == null || !file.Exists)
+        if (file == null)
         {
-            Console.WriteLine("File not found");
+            Console.WriteLine("File not set.");
+            return;
+        }
+
+        if (!file.Exists)
+        {
+            Console.WriteLine("File not found.");
             return;
         }
 
         var xaml = File.ReadAllText(file.FullName);
         var duplicateKeys = ResourceDictionaryToolkit.FindDuplicateKeys(xaml);
+
+        Console.WriteLine();
 
         if (!duplicateKeys.Any())
         {
