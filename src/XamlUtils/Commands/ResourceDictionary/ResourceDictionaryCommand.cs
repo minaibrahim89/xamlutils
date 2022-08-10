@@ -8,5 +8,6 @@ public class ResourceDictionaryCommand : Command
         : base("ResourceDictionary", "Utilities dealing with ResourceDictionary XAML files.")
     {
         AddCommand(new DuplicateKeysCommand());
+        AddCommand(new KeysDiffCommand());
     }
 }
