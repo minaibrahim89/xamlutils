@@ -5,6 +5,7 @@ namespace XamlUtils.Tools;
 public static class ResourceDictionaryToolkit
 {
     private const string XamlNamespace = "http://schemas.microsoft.com/winfx/2006/xaml";
+
     public static List<string> FindDuplicateKeys(string xaml)
     {
         if (xaml == null)
