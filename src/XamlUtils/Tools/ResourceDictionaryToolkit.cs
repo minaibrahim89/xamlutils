@@ -32,9 +32,6 @@ public static class ResourceDictionaryToolkit
         var xml1 = ParseResourceDictionary(xaml1);
         var xml2 = ParseResourceDictionary(xaml2);
 
-        if (xml2.Name.LocalName != "ResourceDictionary")
-            throw new InvalidOperationException("File is not a ResourceDictionary");
-
         var keys1 = xml1.Descendants()
             .Select(element => element.Attribute(XName.Get("Key", XamlNamespace))?.Value)
             .Where(key => key != null);
