@@ -13,10 +13,8 @@ public static class ResourceDictionaryToolkit
 
         var xml = ParseResourceDictionary(xaml);
 
-        return xml.Descendants()
-            .Select(element => element.Attribute(XName.Get("Key", XamlNamespace))?.Value)
-            .Where(key => key != null)
-            .GroupBy(key => key!)
+        return GetKeyAttributes(xml)
+            .GroupBy(key => key)
             .Where(group => group.Count() > 1)
             .Select(group => group.Key)
             .ToList();
@@ -33,13 +31,8 @@ public static class ResourceDictionaryToolkit
         var xml1 = ParseResourceDictionary(xaml1);
         var xml2 = ParseResourceDictionary(xaml2);
 
-        var keys1 = xml1.Descendants()
-            .Select(element => element.Attribute(XName.Get("Key", XamlNamespace))?.Value)
-            .Where(key => key != null);
-
-        var keys2 = xml2.Descendants()
-            .Select(element => element.Attribute(XName.Get("Key", XamlNamespace))?.Value)
-            .Where(key => key != null);
+        var keys1 = GetKeyAttributes(xml1);
+        var keys2 = GetKeyAttributes(xml2);
 
         var removedKeys = keys1.Except(keys2).Select(key => $"-{key}");
         var addedKeys = keys2.Except(keys1).Select(key => $"+{key}");
@@ -55,5 +48,13 @@ public static class ResourceDictionaryToolkit
             throw new InvalidOperationException("File is not a ResourceDictionary");
 
         return xml;
+    }
+
+    private static IEnumerable<string> GetKeyAttributes(XElement resourceDictionary)
+    {
+        return resourceDictionary.Descendants()
+            .Select(element => element.Attribute(XName.Get("Key", XamlNamespace))?.Value)
+            .Where(key => key != null)
+            .Select(key => key!);
     }
 }
