@@ -3,7 +3,7 @@ A set of utilities to help in dealing with XAML files. Currently the following u
 
 **ResourceDictionary Utilities**
 - Find duplicate keys
-- Make keys diff between to XAML files
+- Make keys diff between two XAML files
 
 # How to Use?
 Type `xamlutils --help` and follow the instructions.
